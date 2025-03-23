@@ -48,12 +48,12 @@ gene-regulation/
 
 ```bash
 # Clone the repository
-git clone https://github.com/cfchang63/Gli3-Sufu.git
-cd Gli3-Sufu
+git clone https://github.com/cfchang63/Gli3Sufu.git
+cd Gli3Sufu
 
 # Create and activate the conda environment
 conda env create -f environment.yml
-conda activate Gli3-Sufu
+conda activate Gli3Sufu
 ```
 
 ## Usage
