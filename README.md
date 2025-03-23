@@ -7,7 +7,8 @@ A comprehensive toolkit for analyzing gene regulation data, including ATAC-seq, 
 This repository contains scripts and workflows for analyzing various types of genomic data related to gene regulation:
 
 - **ATAC-seq**: To identify regions of open chromatin
-- **ChIP-seq**: To identify protein-DNA interactions
+- **ChIP-seq**: To identify protein-DNA interactions using Gli3 pulldown
+- **CUT&RUN**: To identify protein-DNA interactions using Gli3 pulldown
 
 
 Each analysis type has its own pipeline with standardized inputs and outputs, making it easy to integrate results across different data types.
