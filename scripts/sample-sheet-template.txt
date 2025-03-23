@@ -1,0 +1,8 @@
+sample,fastq_1,fastq_2,antibody,control
+WT_Input,/path/to/WT_Input.fastq.gz,,Input,
+WT_Gli3_1,/path/to/WT_Gli3_1.fastq.gz,,Gli3,WT_Input
+WT_Gli3_2,/path/to/WT_Gli3_2.fastq.gz,,Gli3,WT_Input
+WT_Flag_1,/path/to/WT_Flag_1.fastq.gz,,Flag,WT_Input
+WT_Flag_2,/path/to/WT_Flag_2.fastq.gz,,Flag,WT_Input
+WT_SATB2_1,/path/to/WT_SATB2_1.fastq.gz,,SATB2,WT_Input
+WT_SATB2_2,/path/to/WT_SATB2_2.fastq.gz,,SATB2,WT_Input

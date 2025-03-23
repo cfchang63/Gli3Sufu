@@ -1,0 +1,49 @@
+gene-regulation/
+├── README.md                      # Main project documentation
+├── environment.yml                # Conda environment specification
+├── data/                          # Example data for testing pipelines
+│   ├── .gitignore                 # Ignore large files
+│   └── sample_lists/              # Lists of samples for each analysis
+│       ├── atac_samples.txt       # ATAC-seq sample list
+│       ├── chip_samples.txt       # ChIP-seq sample list
+│       └── rna_samples.txt        # RNA-seq sample list
+├── config/                        # Configuration files
+│   ├── default_params.yaml        # Default parameters for all pipelines
+│   ├── genomes.yaml               # Reference genome paths and settings
+│   └── analysis_config.yaml       # Analysis-specific configurations
+├── scripts/                       # Analysis scripts
+│   ├── common/                    # Shared utility functions
+│   │   ├── file_utils.sh          # Common file handling functions
+│   │   ├── quality_control.py     # QC utility functions
+│   │   └── visualization.R        # Common visualization functions
+│   ├── atac-seq/                  # ATAC-seq analysis scripts
+│   │   ├── pipeline.sh            # Main ATAC-seq pipeline script
+│   │   ├── annotate_peaks.py      # Python script for peak annotation
+│   │   ├── diff_analysis.R        # R script for differential analysis
+│   │   └── utils/                 # ATAC-seq specific utilities
+│   │       ├── peak_processing.py # Functions for peak processing
+│   │       └── atac_qc.R          # ATAC-seq specific QC functions
+│   ├── chip-seq/                  # ChIP-seq analysis scripts
+│   │   ├── pipeline.sh            # Main ChIP-seq pipeline script
+│   │   └── utils/                 # ChIP-seq specific utilities
+│   └── rna-seq/                   # RNA-seq analysis scripts
+│       ├── pipeline.sh            # Main RNA-seq pipeline script
+│       └── utils/                 # RNA-seq specific utilities
+├── workflow/                      # Workflow definitions (e.g., Snakemake)
+│   ├── Snakefile                  # Main Snakemake workflow
+│   ├── atac-seq.smk               # ATAC-seq specific rules
+│   ├── chip-seq.smk               # ChIP-seq specific rules
+│   └── rna-seq.smk                # RNA-seq specific rules
+├── notebooks/                     # Jupyter notebooks for analysis examples
+│   ├── atac_analysis_example.ipynb
+│   ├── chip_analysis_example.ipynb
+│   └── integrative_analysis.ipynb
+├── docs/                          # Documentation
+│   ├── atac-seq.md                # ATAC-seq documentation
+│   ├── chip-seq.md                # ChIP-seq documentation
+│   ├── rna-seq.md                 # RNA-seq documentation
+│   └── integration.md             # Integrative analysis documentation
+└── test/                          # Unit and integration tests
+    ├── test_atac_pipeline.sh
+    ├── test_chip_pipeline.sh
+    └── test_rna_pipeline.sh
