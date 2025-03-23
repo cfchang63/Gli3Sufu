@@ -77,9 +77,9 @@ The `samples.txt` file should contain one sample name per line. The pipeline exp
 
 [Documentation placeholder for ChIP-seq]
 
-### RNA-seq Analysis
+### CUT&RUN Analysis
 
-[Documentation placeholder for RNA-seq]
+[Documentation placeholder for CUT&RUN]
 
 ## Outputs
 
