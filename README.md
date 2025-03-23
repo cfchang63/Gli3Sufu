@@ -116,7 +116,7 @@ If you use this software in your research, please cite:
 
 ## Contact
 
-[Your Name] - [your.email@example.com]
+Ching-Fang Chang - [Ching-Fang.Chang@cchmc.org]
 
-Project Link: [https://github.com/yourusername/gene-regulation](https://github.com/yourusername/gene-regulation)
+Project Link: [https://github.com/cfchang63/Gli3Sufu](https://github.com/cfchang63/Gli3Sufu)
 #
