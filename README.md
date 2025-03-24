@@ -1,181 +1,274 @@
-# Gli3-Sufu Peak Analysis Workflow
+# Gli3-Sufu Peak Analysis Toolkit
 
-A comprehensive toolkit for analyzing ChIP-seq, CUT&RUN, and ATAC-seq peaks with a focus on the Gli3-Sufu gene regulatory network.
+A comprehensive toolkit for integrating and analyzing ChIP-seq, CUT&RUN, ATAC-seq, and Split-DamID data to study gene regulatory networks, with a focus on the Gli3-Sufu pathway.
 
 ## Overview
 
-This repository contains scripts and workflows for integrating and analyzing multiple types of genomic data:
+This repository contains scripts and workflows for processing and integrating multiple types of genomic data:
 
-- **ChIP-seq**: To identify Gli3, Foxf2, and SATB2 binding sites
-- **CUT&RUN**: To identify protein-DNA interactions using Gli3 antibodies
-- **ATAC-seq**: To identify regions of open chromatin
+- **ChIP-seq**: For identifying transcription factor binding sites
+- **CUT&RUN**: For high-resolution protein-DNA interaction mapping
+- **ATAC-seq**: For identifying regions of open chromatin
+- **Split-DamID**: For mapping protein-DNA interactions in vivo without antibodies
 
-The scripts in this repository automate the process of intersecting peaks from different data types, annotating the intersections, and performing enrichment analysis.
+The workflows automate the process from raw sequencing data processing to peak calling, differential analysis, annotation, and integration of different data types.
 
-## Scripts
+## Table of Contents
 
-### 1. Peak Intersection Workflow (`peak-intersection-workflow.sh`)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [ChIP-seq Analysis](#chip-seq-analysis)
+- [ATAC-seq Analysis](#atac-seq-analysis)
+- [CUT&RUN Analysis](#cutrun-analysis)
+- [Split-DamID Analysis](#split-damid-analysis)
+- [Data Integration](#data-integration)
+- [License](#license)
 
-This script automates the process of:
-- Running nf-core pipelines for ChIP-seq or CUT&RUN analysis (optional)
-- Preparing BED files for intersection
-- Intersecting peaks from different experiments
-- Annotating the intersected peaks using HOMER
+## Installation
 
-#### Usage:
-
-```bash
-./peak-intersection-workflow.sh --output results_dir --genome mm10 [OPTIONS]
-```
-
-Options:
-- `-o, --output DIR`: Output directory
-- `-g, --genome NAME`: Genome name (default: mm10)
-- `--gtf FILE`: GTF file path
-- `--fasta FILE`: Genome FASTA file
-- `--blacklist FILE`: Blacklist regions BED file
-- `--bowtie2 DIR`: Bowtie2 index directory
-- `--homer PATH`: Path to HOMER's annotatePeaks.pl
-- `--run-nf-core`: Run nf-core workflow
-- `--sample-sheet FILE`: Sample sheet for nf-core workflow
-- `--workflow NAME`: nf-core workflow to use (chipseq or cutandrun)
-
-### 2. Motif Analysis (`motif-analysis.sh`)
-
-This script performs motif analysis on the intersection peaks using HOMER's findMotifsGenome.pl.
-
-#### Usage:
-
-```bash
-./motif-analysis.sh --output motif_results --intersections ./results/intersections [OPTIONS]
-```
-
-Options:
-- `-o, --output DIR`: Output directory
-- `-g, --genome NAME`: Genome name
-- `-i, --intersections DIR`: Directory with intersection BED files
-- `-s, --size NUM`: Size of region for motif analysis
-- `-m, --motif-len LIST`: Comma-separated list of motif lengths
-- `-t, --threads NUM`: Number of threads to use
-
-### 3. Peak Enrichment Analysis (`analyze_peak_enrichment.py`)
-
-This Python script analyzes the enrichment of peaks in genomic features and performs statistical analysis on gene enrichment.
-
-#### Usage:
-
-```bash
-python analyze_peak_enrichment.py --input annotated_peaks.txt --output results_dir [OPTIONS]
-```
-
-Options:
-- `--input, -i`: Input annotated peak file from HOMER
-- `--output, -o`: Output directory for results
-- `--genome, -g`: Genome assembly (default: mm10)
-- `--promoter-window`: Window size around TSS (default: 2000)
-- `--background, -b`: Background peak file for enrichment analysis
-- `--gene-list, -l`: List of genes of interest
-
-## Workflow Example
-
-Here's a complete workflow example:
-
-```bash
-# 1. Run the peak intersection workflow
-./peak-intersection-workflow.sh --output ./results --genome mm10 --run-nf-core \
-    --sample-sheet cutnrun_samples.csv --workflow cutandrun
-
-# 2. Run motif analysis on the intersections
-./motif-analysis.sh --output ./motif_results --intersections ./results/intersections
-
-# 3. Analyze peak enrichment
-python analyze_peak_enrichment.py --input ./results/annotations/Gli3_Foxf2_ATACseq_annotation.txt \
-    --output ./enrichment_results --background ./results/annotations/Gli3_annotation.txt
-```
-
-## Sample Sheet Format
-
-For nf-core workflows, the sample sheet should be in CSV format:
-
-```csv
-sample,fastq_1,fastq_2,antibody,control
-WT_Input,/path/to/WT_Input.fastq.gz,,Input,
-WT_Gli3_1,/path/to/WT_Gli3_1.fastq.gz,,Gli3,WT_Input
-```
-
-## Dependencies
+### Prerequisites
 
 - Bash (>= 4.0)
 - Python (>= 3.8)
 - R (>= 4.0)
-- Conda (for nf-core workflows)
-- Nextflow
-- HOMER
-- BEDTools
-- Pandas, NumPy, Matplotlib, Seaborn (Python packages)
+- Conda/Mamba
 
-## Installation
+### Setting up the environment
+
+Clone the repository:
 
 ```bash
-# Clone the repository
 git clone https://github.com/yourusername/Gli3-Sufu-Analysis.git
 cd Gli3-Sufu-Analysis
-
-# Make scripts executable
-chmod +x *.sh
-
-# Install Python dependencies
-pip install pandas numpy matplotlib seaborn scipy statsmodels pyranges genomepy
-
-# For nf-core workflows
-conda create --name nf-core python=3.12 nf-core nextflow
-conda activate nf-core
 ```
 
-## Output Structure
+Create and activate the Conda environment:
 
-```
-results/
-├── bed_files/               # Prepared BED files
-├── intersections/           # Intersection BED files
-│   ├── Gli3_Foxf2.bed
-│   ├── Gli3_Satb2.bed
-│   └── ...
-├── annotations/             # Annotated peaks
-│   ├── Gli3_Foxf2_annotation.txt
-│   ├── Gli3_Satb2_annotation.txt
-│   └── ...
-└── nf-core-*/               # nf-core workflow output (if run)
-
-motif_results/               # Motif analysis results
-├── Gli3_Foxf2/
-│   ├── homerResults.html
-│   └── ...
-└── ...
-
-enrichment_results/          # Peak enrichment analysis
-├── top_genes.tsv
-├── top_genes.png
-├── genomic_distribution.png
-└── ...
+```bash
+conda env create -f environment.yml
+conda activate gli3-sufu
 ```
 
-## References
+### Configuration
 
-- nf-core ChIP-seq: https://nf-co.re/chipseq
-- nf-core CUT&RUN: https://nf-co.re/cutandrun
-- HOMER: http://homer.ucsd.edu/homer/
-- BEDTools: https://bedtools.readthedocs.io/
+Before running the workflows, make sure to set up your genome references in the `genome_references.config` file or provide the paths as command-line arguments.
+
+## Quick Start
+
+The repository provides a master workflow script that can orchestrate analyses for all data types:
+
+```bash
+./scripts/gli3-sufu-master-workflow.sh \
+  --output results \
+  --genome mm10 \
+  --chipseq-samples samples/chipseq_samples.csv \
+  --atacseq-samples samples/atacseq_samples.csv \
+  --cutrun-samples samples/cutrun_samples.csv \
+  --splitdamid-samples samples/splitdamid_samples.txt
+```
+
+For individual analyses, see the respective sections below.
+
+## ChIP-seq Analysis
+
+The ChIP-seq workflow processes raw FASTQ files through alignment, peak calling, and annotation.
+
+### Sample Preparation
+
+Create a sample sheet CSV file with the following format:
+
+```csv
+sample,fastq_1,fastq_2,antibody,control
+WT_Input,/path/to/WT_Input_R1.fastq.gz,/path/to/WT_Input_R2.fastq.gz,Input,
+WT_Gli3_1,/path/to/WT_Gli3_1_R1.fastq.gz,/path/to/WT_Gli3_1_R2.fastq.gz,Gli3,WT_Input
+```
+
+### Running the Analysis
+
+```bash
+./scripts/chipseq-nfcore-workflow.sh \
+  --sample-sheet samples/chipseq_samples.csv \
+  --output chipseq_results \
+  --genome mm10
+```
+
+### Additional Options
+
+- `--broad-peak`: Call broad peaks instead of narrow peaks
+- `--single-end`: Process single-end sequencing data
+- `--integration-peaks FILE`: Integrate with external peak files
+
+### Output
+
+The workflow produces:
+- Aligned BAM files
+- Peak calls in BED format
+- Peak annotations
+- Genome browser tracks (BigWig format)
+
+## ATAC-seq Analysis
+
+The ATAC-seq workflow processes raw FASTQ files to identify open chromatin regions.
+
+### Sample Preparation
+
+Create a sample sheet CSV file with the following format:
+
+```csv
+sample,fastq_1,fastq_2,replicate,single_end
+WT_1,/path/to/WT_1_R1.fastq.gz,/path/to/WT_1_R2.fastq.gz,1,0
+WT_2,/path/to/WT_2_R1.fastq.gz,/path/to/WT_2_R2.fastq.gz,2,0
+```
+
+### Running the Analysis
+
+```bash
+./scripts/atacseq-nfcore-workflow.sh \
+  --sample-sheet samples/atacseq_samples.csv \
+  --output atacseq_results \
+  --genome mm10
+```
+
+### Additional Options
+
+- `--chip-peaks DIR`: Integrate with ChIP-seq peaks
+- `--cutrun-peaks DIR`: Integrate with CUT&RUN peaks
+
+### Output
+
+The workflow produces:
+- Aligned BAM files
+- Peak calls in BED format
+- Differential accessibility analysis
+- Genome browser tracks (BigWig format)
+- Integration with other data types
+
+## CUT&RUN Analysis
+
+CUT&RUN provides high-resolution mapping of protein-DNA interactions with lower background than ChIP-seq.
+
+### Sample Preparation
+
+Create a sample sheet CSV file with the following format (similar to ChIP-seq):
+
+```csv
+sample,fastq_1,fastq_2,antibody,control
+WT_Input,/path/to/WT_Input_R1.fastq.gz,/path/to/WT_Input_R2.fastq.gz,Input,
+WT_Gli3_1,/path/to/WT_Gli3_1_R1.fastq.gz,/path/to/WT_Gli3_1_R2.fastq.gz,Gli3,WT_Input
+```
+
+### Running the Analysis
+
+```bash
+./scripts/cutandrun-peak-intersect-annotate.sh \
+  --output cutrun_results \
+  --genome mm10 \
+  --run-nf-core \
+  --sample-sheet samples/cutrun_samples.csv \
+  --workflow cutandrun
+```
+
+### Output
+
+The workflow produces:
+- Aligned BAM files
+- Peak calls using SEACR (specialized for CUT&RUN)
+- Genome browser tracks (BigWig format)
+- Peak annotations
+
+## Split-DamID Analysis
+
+Split-DamID maps protein-DNA interactions in vivo without antibodies or fixation.
+
+### Sample Preparation
+
+Create a text file listing your samples:
+
+```
+DAM-1
+DAM-2
+DAM-3
+DAM-Dox-1
+DAM-Dox-2
+DAM-Dox-3
+Gli3-Hand2-1
+Gli3-Hand2-2
+Gli3-Hand2-3
+Gli3-Hand2-Dox-1
+Gli3-Hand2-Dox-2
+Gli3-Hand2-Dox-3
+```
+
+### Preparing GATC Sites and Blacklist
+
+Before running Split-DamID analysis, you need to prepare:
+
+1. GATC sites file:
+```bash
+python scripts/create-gatc-sites.py /path/to/genome.fa /path/to/gatc_sites.bed
+```
+
+2. Blacklist + mtDNA file:
+```bash
+./scripts/create-blacklist-mtdna.sh --genome mm10 --output blacklist_mtDNA.bed
+```
+
+### Running the Analysis
+
+```bash
+./scripts/splitdamid-workflow.sh \
+  --samples samples/splitdamid_samples.txt \
+  --output splitdamid_results \
+  --genome mm10 \
+  --fasta /path/to/mm10.fa \
+  --bowtie2 /path/to/mm10_bt2index \
+  --gatc /path/to/gatc_sites.bed \
+  --blacklist /path/to/blacklist_mtDNA.bed \
+  --extension-script scripts/gatc-extension-script.py
+```
+
+### Differential Analysis
+
+After processing, run differential binding analysis:
+
+```bash
+./scripts/splitdamid-binning-workflow.sh \
+  --input splitdamid_results \
+  --output splitdamid_diffbind
+```
+
+### Output
+
+The workflow produces:
+- BAM files (aligned, extended to GATC sites, filtered)
+- Peak calls from MACS3
+- Coverage tracks (BigWig, bedGraph)
+- Binned genomic coverage analysis
+- Log2 fold change calculations between conditions
+
+## Data Integration
+
+The toolkit provides scripts for integrating various data types:
+
+```bash
+./scripts/peak-intersection-workflow.sh \
+  --output integration_results \
+  --genome mm10 \
+  --chipseq-peaks chipseq_results/peaks \
+  --atacseq-peaks atacseq_results/peaks \
+  --cutrun-peaks cutrun_results/peaks \
+  --splitdamid-peaks splitdamid_results/peaks
+```
+
+For motif analysis of intersections:
+
+```bash
+./scripts/motif-analysis-homer.sh \
+  --output motif_results \
+  --genome mm10 \
+  --intersections integration_results/intersections
+```
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contributors
-
-- Your Name - [your.email@example.com]
-
-## Acknowledgments
-
-- The nf-core community for their excellent pipelines
-- The HOMER team for their annotation and motif analysis tools
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
