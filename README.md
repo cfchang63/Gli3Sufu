@@ -49,10 +49,6 @@ conda env create -f environment.yml
 conda activate gli3-sufu
 ```
 
-### Configuration
-
-Before running the workflows, make sure to set up your genome references in the `genome_references.config` file or provide the paths as command-line arguments.
-
 ## Quick Start
 
 The repository provides a master workflow script that can orchestrate analyses for all data types:
