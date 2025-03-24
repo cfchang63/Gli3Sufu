@@ -1,0 +1,13 @@
+SampleID,Condition,Replicate,Treatment,bamReads,Peaks,PeakCaller
+DAM-1,DAM,1,NoDox,DAM-1_filtered_sorted.bam,DAM-1/DAM-1_broad_peaks.broadPeak,macs
+DAM-2,DAM,2,NoDox,DAM-2_filtered_sorted.bam,DAM-2/DAM-2_broad_peaks.broadPeak,macs
+DAM-3,DAM,3,NoDox,DAM-3_filtered_sorted.bam,DAM3/DAM-3_broad_peaks.broadPeak,macs
+DAM-Dox-1,DAM-Dox,1,Dox,DAM-Dox-1_filtered_sorted.bam,DAM-Dox-1/DAM-Dox-1_broad_peaks.broadPeak,macs
+DAM-Dox-2,DAM-Dox,2,Dox,DAM-Dox-2_filtered_sorted.bam,DAM-Dox-2/DAM-Dox-2_broad_peaks.broadPeak,macs
+DAM-Dox-3,DAM-Dox,3,Dox,DAM-Dox-3_filtered_sorted.bam,DAM-Dox-3/DAM-Dox-3_broad_peaks.broadPeak,macs
+Gli3-Hand2-1,Gli3-Hand2,1,NoDox,Gli3-Hand2-1_filtered_sorted.bam,Gli3-Hand2-1/Gli3-Hand2-1_broad_peaks.broadPeak,macs
+Gli3-Hand2-2,Gli3-Hand2,2,NoDox,Gli3-Hand2-2_filtered_sorted.bam,Gli3-Hand2-2/Gli3-Hand2-2_broad_peaks.broadPeak,macs
+Gli3-Hand2-3,Gli3-Hand2,3,NoDox,Gli3-Hand2-3_filtered_sorted.bam,Gli3-Hand2-3/Gli3-Hand2-3_broad_peaks.broadPeak,macs
+Gli3-Hand2-Dox-1,Gli3-Hand2-Dox,1,Dox,Gli3-Hand2-Dox-1_filtered_sorted.bam,Gli3-Hand2-Dox-1/Gli3-Hand2-Dox-1_broad_peaks.broadPeak,macs
+Gli3-Hand2-Dox-2,Gli3-Hand2-Dox,2,Dox,Gli3-Hand2-Dox-2_filtered_sorted.bam,Gli3-Hand2-Dox-2/Gli3-Hand2-Dox-2_broad_peaks.broadPeak,macs
+Gli3-Hand2-Dox-3,Gli3-Hand2-Dox,3,Dox,Gli3-Hand2-Dox-3_filtered_sorted.bam,Gli3-Hand2-Dox-3/Gli3-Hand2-Dox-3_broad_peaks.broadPeak,macs

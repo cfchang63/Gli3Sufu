@@ -6,7 +6,7 @@
 # different ChIP-seq, CUT&RUN, and ATAC-seq experiments and annotating
 # the results using HOMER's annotatePeaks.pl.
 #
-# Author: Claude
+# Author: Ching-Fang Chang
 # Date: March 23, 2025
 #
 

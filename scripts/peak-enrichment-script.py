@@ -8,7 +8,7 @@ terms. It works with the annotated peak files from HOMER's annotatePeaks.pl.
 Usage:
     python analyze_peak_enrichment.py --input annotated_peaks.txt --output results_directory
 
-Author: Claude
+Author: Ching-Fang Chang
 Date: March 23, 2025
 """
 

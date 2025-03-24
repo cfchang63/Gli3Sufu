@@ -1,0 +1,5 @@
+sample,fastq_1,fastq_2,replicate,single_end
+WT_1,/path/to/WT_1_R1.fastq.gz,/path/to/WT_1_R2.fastq.gz,1,0
+WT_2,/path/to/WT_2_R1.fastq.gz,/path/to/WT_2_R2.fastq.gz,2,0
+KO_1,/path/to/KO_1_R1.fastq.gz,/path/to/KO_1_R2.fastq.gz,1,0
+KO_2,/path/to/KO_2_R1.fastq.gz,/path/to/KO_2_R2.fastq.gz,2,0

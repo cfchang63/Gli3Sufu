@@ -5,7 +5,7 @@
 # This script performs motif analysis on the intersection peaks
 # using HOMER's findMotifsGenome.pl
 #
-# Author: Claude
+# Author: Ching-Fang Chang
 # Date: March 23, 2025
 #
 
