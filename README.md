@@ -38,8 +38,8 @@ The workflows automate the process from raw sequencing data processing to peak c
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/Gli3-Sufu-Analysis.git
-cd Gli3-Sufu-Analysis
+git clone https://github.com/cfchang63/Gli3Sufu.git
+cd Gli3Sufu
 ```
 
 Create and activate the Conda environment:
@@ -48,10 +48,6 @@ Create and activate the Conda environment:
 conda env create -f environment.yml
 conda activate gli3-sufu
 ```
-
-### Configuration
-
-Before running the workflows, make sure to set up your genome references in the `genome_references.config` file or provide the paths as command-line arguments.
 
 ## Quick Start
 
